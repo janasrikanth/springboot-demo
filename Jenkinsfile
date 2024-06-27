@@ -8,17 +8,23 @@ pipeline {
         }
 		stage('Code-Build') {
             steps {
-                ./gradlew clean build
+                script {
+                    sh "./gradlew clean build"
+                }
             }
         }
 		stage('Unit-Test') {
             steps {
-                ./gradlew clean test
+               script {
+                    sh "./gradlew clean test"
+                }
             }
         }
         stage('Code-Quality') {
             steps {
-                ./gradlew clean sonarqube -Dsonar.verbose=true -Dproject.settings=sonar-project.properties
+                script {
+                    sh "./gradlew clean sonarqube -Dsonar.verbose=true -Dproject.settings=sonar-project.properties"
+                }
             }
         }
 		stage('Image-Build') {
